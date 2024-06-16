@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head')  %>
+    <title>Blog</title>
+</head>
+<body>
+    <div class="container m-3">
+        <h1 class="card-title">
+        <%= locals.bloginfo.title  %>
+        </h1>
+        <br>
+        <p class="card-text">
+        <%= locals.bloginfo.body  %>
+        </p>
+    </div>
+    <br>
+    <div class="container m-3">
+        <h5>Comments (<%= locals.comments.length %>)</h5>
+        <% if (locals.user) { %>
+            <form action="/blog/comment/<%= locals.bloginfo._id %>" method="post">
+                <div class="form-group m-2">
+                <input type="text" name="content" class="form-control" id="content" aria-describedby="content" placeholder="Enter your comment" style="width:500px;"/>
+                </div>
+                <button type="submit" class="btn btn-primary m-2">Post</button>
+            </form>
+        <% }  %>
+        <% locals.comments.forEach(comment => { %>
+            <div class="container m-3">
+                <img src="<%= comment.createdBy.profilePhoto %>" class="card-img-top" alt="..." />
+                <input type="text" class="form-control" style="width:500px;" value="<%= comment.content  %>"/>
+            </div>
+        <% }) %>
+    </div>
+</body>
+</html>
