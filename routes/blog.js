@@ -51,10 +51,6 @@ router.post("/addblog", upload.single("coverImage"), async(req, res) => {
 })
 
 router.post("/comment/:blogId", async(req, res) => {
-  console.log("comments")
-  console.log(req.body.content)
-  console.log(req.params.blogId)
-  console.log(req.user._id)
   await Comment.create({
       content: req.body.content,
       blogId: req.params.blogId,
